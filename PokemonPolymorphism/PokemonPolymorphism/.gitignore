@@ -1,0 +1,36 @@
+## Build results
+[Bb]in/
+[Oo]bj/
+
+## Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.ide
+*.VC.db
+*.VC.opendb
+
+## Rider
+.idea/
+
+## NCrunch
+*.ncrunch*
+
+## VS Code
+.vscode/
+
+## Build logs
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## NuGet packages
+*.nupkg
+packages/
+
+## Publish outputs
+**/app.publish/
