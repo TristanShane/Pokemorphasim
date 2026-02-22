@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{437B7F2C-B1E9-4548-8857-9068B1777249}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PokemonPolymorphism</RootNamespace>
+    <AssemblyName>PokemonPolymorphism</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Battle\BattleActionResult.cs" />
+    <Compile Include="Battle\BattleResult.cs" />
+    <Compile Include="Battle\BattleService.cs" />
+    <Compile Include="Battle\IBattleStrategy.cs" />
+    <Compile Include="Battle\IMoveSelectionStrategy.cs" />
+    <Compile Include="Battle\IPokemonSelectionStrategy.cs" />
+    <Compile Include="Battle\Leaderboard.cs" />
+    <Compile Include="Battle\RandomMoveSelectionStrategy.cs" />
+    <Compile Include="Battle\RandomPokemonSelectionStrategy.cs" />
+    <Compile Include="Battle\WeaknessAwareBattleStrategy.cs" />
+    <Compile Include="Data\IMoveRepository.cs" />
+    <Compile Include="Data\IPokemonRepository.cs" />
+    <Compile Include="Data\ITableGateway.cs" />
+    <Compile Include="Data\MoveRepository.cs" />
+    <Compile Include="Data\MoveTableGateway.cs" />
+    <Compile Include="Data\PokemonDatabase.cs" />
+    <Compile Include="Data\PokemonRepository.cs" />
+    <Compile Include="Data\PokemonTableGateway.cs" />
+    <Compile Include="Models\Bulbasaur.cs" />
+    <Compile Include="Models\Charmander.cs" />
+    <Compile Include="Models\DatabasePokemon.cs" />
+    <Compile Include="Models\Eevee.cs" />
+    <Compile Include="Models\Pikachu.cs" />
+    <Compile Include="Models\Pokemon.cs" />
+    <Compile Include="Models\Squirtle.cs" />
+    <Compile Include="Moves\Ember.cs" />
+    <Compile Include="Moves\IMove.cs" />
+    <Compile Include="Moves\MoveProfile.cs" />
+    <Compile Include="Moves\Thunderbolt.cs" />
+    <Compile Include="Moves\WaterGun.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
