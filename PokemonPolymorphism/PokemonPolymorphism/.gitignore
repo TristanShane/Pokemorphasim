@@ -21,6 +21,9 @@
 ## VS Code
 .vscode/
 
+## Copilot snapshots
+CopilotSnapshots/
+
 ## Build logs
 *.log
 
