@@ -1,41 +1,33 @@
 using System.Collections.Generic;
-using System;
-using System.Data;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace PokemonPolymorphism
 {
     internal sealed class PokemonRepository : IPokemonRepository
     {
-        private readonly PokemonDatabase database;
+        private readonly PokemonContext context;
 
-        public PokemonRepository(PokemonDatabase database)
+        public PokemonRepository(PokemonContext context)
         {
-            // We inject the database to respect dependency inversion.
-            this.database = database;
+            // We inject the context to respect dependency inversion.
+            this.context = context;
         }
 
         public IReadOnlyList<Pokemon> GetAll()
         {
-            // We map rows into rich objects to centralize data transformation.
-            var results = new List<Pokemon>();
-            foreach (DataRow row in database.PokemonTable.Rows)
-            {
-                // We split allowed moves so the Pokemon instance can enforce its own move rules.
-                var allowedMoves = ((string)row["AllowedMoves"])
-                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(move => move.Trim())
-                    .ToList();
-
-                results.Add(new DatabasePokemon(
-                    (string)row["Name"],
-                    (string)row["Type"],
-                    (string)row["Weakness"],
-                    (int)row["Health"],
-                    allowedMoves));
-            }
-
-            return results;
+            // We use AsNoTracking to reduce change-tracking memory overhead for read-only data.
+            return context.Pokemon
+                .AsNoTracking()
+                .Include(pokemon => pokemon.PokemonMoves)
+                .ThenInclude(link => link.Move)
+                .Select(pokemon => new DatabasePokemon(
+                    pokemon.Name,
+                    pokemon.Type,
+                    pokemon.Weakness,
+                    pokemon.Health,
+                    pokemon.PokemonMoves.Select(link => link.Move.Name).ToList()))
+                .ToList();
         }
     }
 }

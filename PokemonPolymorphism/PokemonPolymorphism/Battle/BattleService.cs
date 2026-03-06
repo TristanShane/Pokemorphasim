@@ -53,7 +53,8 @@ namespace PokemonPolymorphism
             IMoveSelectionStrategy moveSelectionStrategy)
         {
             // We build a log so the caller can display the full battle narrative.
-            var log = new StringBuilder();
+            // We preallocate a small buffer to reduce reallocations during logging.
+            var log = new StringBuilder(256);
 
             while (attacker.Health > 0 && defender.Health > 0)
             {

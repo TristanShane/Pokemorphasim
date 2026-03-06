@@ -43,24 +43,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\DemoRunner.cs" />
+    <Compile Include="Application\MoveCatalog.cs" />
+    <Compile Include="Application\PokemonRoster.cs" />
     <Compile Include="Battle\BattleActionResult.cs" />
     <Compile Include="Battle\BattleResult.cs" />
     <Compile Include="Battle\BattleService.cs" />
-    <Compile Include="Battle\IBattleStrategy.cs" />
-    <Compile Include="Battle\IMoveSelectionStrategy.cs" />
-    <Compile Include="Battle\IPokemonSelectionStrategy.cs" />
+    <Compile Include="Battle\Interfaces\IBattleStrategy.cs" />
+    <Compile Include="Battle\Interfaces\IMoveSelectionStrategy.cs" />
+    <Compile Include="Battle\Interfaces\IPokemonSelectionStrategy.cs" />
     <Compile Include="Battle\Leaderboard.cs" />
     <Compile Include="Battle\RandomMoveSelectionStrategy.cs" />
     <Compile Include="Battle\RandomPokemonSelectionStrategy.cs" />
     <Compile Include="Battle\WeaknessAwareBattleStrategy.cs" />
-    <Compile Include="Data\IMoveRepository.cs" />
-    <Compile Include="Data\IPokemonRepository.cs" />
-    <Compile Include="Data\ITableGateway.cs" />
+    <Compile Include="Data\DatabaseInitializer.cs" />
+    <Compile Include="Data\Interfaces\IMoveRepository.cs" />
+    <Compile Include="Data\Interfaces\IPokemonRepository.cs" />
+    <Compile Include="Data\MoveEntity.cs" />
     <Compile Include="Data\MoveRepository.cs" />
-    <Compile Include="Data\MoveTableGateway.cs" />
-    <Compile Include="Data\PokemonDatabase.cs" />
+    <Compile Include="Data\PokemonContext.cs" />
+    <Compile Include="Data\PokemonEntity.cs" />
+    <Compile Include="Data\PokemonMoveEntity.cs" />
     <Compile Include="Data\PokemonRepository.cs" />
-    <Compile Include="Data\PokemonTableGateway.cs" />
     <Compile Include="Models\Bulbasaur.cs" />
     <Compile Include="Models\Charmander.cs" />
     <Compile Include="Models\DatabasePokemon.cs" />
@@ -82,6 +86,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migrations\20240312000000_InitialCreate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.32">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.32" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.32" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -31,3 +31,6 @@ using System.Runtime.InteropServices;
 //
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// We expose internal types to the test project without making them public.
+[assembly: InternalsVisibleTo("PokemonPolymorphism.Tests")]

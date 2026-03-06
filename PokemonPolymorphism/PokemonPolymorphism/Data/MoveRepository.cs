@@ -1,29 +1,25 @@
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace PokemonPolymorphism
 {
     internal sealed class MoveRepository : IMoveRepository
     {
-        private readonly PokemonDatabase database;
+        private readonly PokemonContext context;
 
-        public MoveRepository(PokemonDatabase database)
+        public MoveRepository(PokemonContext context)
         {
-            this.database = database;
+            this.context = context;
         }
 
         public IReadOnlyList<MoveProfile> GetAll()
         {
-            var results = new List<MoveProfile>();
-            foreach (DataRow row in database.MoveTable.Rows)
-            {
-                results.Add(new MoveProfile(
-                    (string)row["Name"],
-                    (string)row["Type"],
-                    (int)row["Power"]));
-            }
-
-            return results;
+            // We use AsNoTracking to avoid tracking overhead for read-only queries.
+            return context.Moves
+                .AsNoTracking()
+                .Select(move => new MoveProfile(move.Name, move.Type, move.Power))
+                .ToList();
         }
     }
 }

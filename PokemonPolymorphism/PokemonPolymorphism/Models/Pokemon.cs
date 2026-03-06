@@ -13,19 +13,22 @@ namespace PokemonPolymorphism
         public string Type { get; }
         // We keep weakness immutable to avoid changing battle rules mid-fight.
         public string Weakness { get; }
-        // We keep allowed moves on the Pokemon to enforce type-specific move rules.
-        public IReadOnlyCollection<string> AllowedMoveNames { get; }
+        // We use a hash set to keep move lookups fast and reduce allocations.
+        private readonly HashSet<string> allowedMoveNames;
+
+        // We expose the allowed moves for diagnostics without allowing mutation.
+        public IReadOnlyCollection<string> AllowedMoveNames => allowedMoveNames;
         // We keep health mutable because battles are expected to reduce it.
         public int Health { get; private set; }
 
-        protected Pokemon(string name, string type, string weakness, int health, IReadOnlyCollection<string> allowedMoveNames)
+        protected Pokemon(string name, string type, string weakness, int health, IEnumerable<string> allowedMoveNames)
         {
             Name = name;
             Type = type;
             Weakness = weakness;
             Health = health;
-            // We store allowed move names to let selection strategies enforce rules.
-            AllowedMoveNames = allowedMoveNames;
+            // We normalize allowed move names for consistent lookups.
+            this.allowedMoveNames = new HashSet<string>(allowedMoveNames, StringComparer.OrdinalIgnoreCase);
         }
 
         // We make this abstract to force each Pokemon to provide its own behavior.
@@ -40,7 +43,7 @@ namespace PokemonPolymorphism
         public bool CanUseMove(MoveProfile move)
         {
             // We centralize the rule so all strategies can rely on a single check.
-            return AllowedMoveNames.Contains(move.Name);
+            return allowedMoveNames.Contains(move.Name);
         }
     }
 }

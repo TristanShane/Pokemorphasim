@@ -5,7 +5,7 @@ namespace PokemonPolymorphism
     // We use a data-driven Pokemon type to represent rows loaded from the database.
     internal sealed class DatabasePokemon : Pokemon
     {
-        public DatabasePokemon(string name, string type, string weakness, int health, IReadOnlyCollection<string> allowedMoveNames)
+        public DatabasePokemon(string name, string type, string weakness, int health, IEnumerable<string> allowedMoveNames)
             : base(name, type, weakness, health, allowedMoveNames)
         {
         }
