@@ -73,11 +73,15 @@
     <Compile Include="Moves\MoveProfile.cs" />
     <Compile Include="Moves\Thunderbolt.cs" />
     <Compile Include="Moves\WaterGun.cs" />
+    <Compile Include="Notes\InheritanceMappingNotes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
